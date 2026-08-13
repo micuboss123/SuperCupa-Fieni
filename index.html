@@ -148,7 +148,9 @@
       <div class="match-label">Semifinala 1</div>
       <div class="card" id="sf1">
         <div class="team-row">
+          <!-- EDITEAZA numele echipei aici -->
           <span class="team-name" id="sf1-name-a">Fc Merilor🍎</span>
+          <!-- EDITEAZA scorul aici (intre ghilimele, sau "-" daca nu s-a jucat) -->
           <span class="score-box" id="sf1-score-a">-</span>
         </div>
         <div class="team-row">
@@ -223,49 +225,6 @@
 </main>
 
 <script>
-  /* =========================================================
-     EDITEAZĂ AICI numele echipelor și scorurile.
-     Lasă ghilimele goale "" pentru un scor care încă nu e jucat
-     (se va afișa "-"). Pentru nume, scrie orice text vrei.
-     După ce modifici, salvează / dă Commit pe GitHub.
-     ========================================================= */
-  const DATE = {
-    sf1: { numeA: "Echipa A", scorA: "", numeB: "Echipa B", scorB: "" },
-    sf2: { numeA: "Echipa C", scorA: "", numeB: "Echipa D", scorB: "" },
-    finalaMare: { numeA: "Câștigător SF1", scorA: "", numeB: "Câștigător SF2", scorB: "" },
-    finalaMica: { numeA: "Pierzător SF1", scorA: "", numeB: "Pierzător SF2", scorB: "" }
-  };
-  /* ========================================================= */
-
-  function set(id, value){
-    const el = document.getElementById(id);
-    if (el) el.textContent = (value === "" || value === null || value === undefined) ? "-" : value;
-  }
-  function setName(id, value){
-    const el = document.getElementById(id);
-    if (el && value) el.textContent = value;
-  }
-
-  setName('sf1-name-a', DATE.sf1.numeA);
-  setName('sf1-name-b', DATE.sf1.numeB);
-  set('sf1-score-a', DATE.sf1.scorA);
-  set('sf1-score-b', DATE.sf1.scorB);
-
-  setName('sf2-name-a', DATE.sf2.numeA);
-  setName('sf2-name-b', DATE.sf2.numeB);
-  set('sf2-score-a', DATE.sf2.scorA);
-  set('sf2-score-b', DATE.sf2.scorB);
-
-  setName('fm-name-a', DATE.finalaMare.numeA);
-  setName('fm-name-b', DATE.finalaMare.numeB);
-  set('fm-score-a', DATE.finalaMare.scorA);
-  set('fm-score-b', DATE.finalaMare.scorB);
-
-  setName('fn-name-a', DATE.finalaMica.numeA);
-  setName('fn-name-b', DATE.finalaMica.numeB);
-  set('fn-score-a', DATE.finalaMica.scorA);
-  set('fn-score-b', DATE.finalaMica.scorB);
-
   // ---- Draw bracket connector lines dynamically ----
   function drawBracketLines(){
     const bracket = document.getElementById('bracket');
