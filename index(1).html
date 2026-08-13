@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SuperCupa Fieni</title>
+<style>
+  :root{
+    --blue:#2563eb;
+    --orange:#f59e0b;
+    --gray-bg:#f4f6f9;
+    --text:#111827;
+    --text-muted:#6b7280;
+    --border:#e5e7eb;
+    --line:#c7cdd6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--gray-bg);
+    color:var(--text);
+  }
+  header{
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    text-align:center;
+    padding:28px 16px 20px;
+  }
+  header h1{
+    margin:0;
+    font-size:1.9rem;
+    color:var(--blue);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+  }
+  header .subtitle{
+    color:var(--text-muted);
+    font-size:0.95rem;
+    margin-top:6px;
+  }
+  main{
+    max-width:1100px;
+    margin:0 auto;
+    padding:40px 20px 60px;
+  }
+
+  /* ---- Bracket grid ---- */
+  .bracket{
+    position:relative;
+    display:grid;
+    grid-template-columns: 1fr 70px 1fr;
+    grid-template-rows: auto auto auto;
+    row-gap:28px;
+    column-gap:0;
+  }
+  .bracket svg.bracket-lines{
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:0;
+  }
+  .bracket-lines path{
+    fill:none;
+    stroke:var(--line);
+    stroke-width:2;
+  }
+
+  .node{ position:relative; z-index:1; }
+  .node.sf1{ grid-column:1; grid-row:1; }
+  .node.sf2{ grid-column:1; grid-row:2; }
+  .node.final-mare{ grid-column:3; grid-row:1 / 3; align-self:center; }
+  .node.final-mica{ grid-column:3; grid-row:3; margin-top:8px; }
+
+  .match-label{
+    color:var(--blue);
+    font-weight:700;
+    font-size:0.95rem;
+    margin-bottom:8px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px 18px;
+  }
+  .card.highlight-blue{ border:2px solid var(--blue); }
+  .card.highlight-orange{ border:2px solid var(--orange); }
+
+  .team-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:6px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .team-row:last-of-type{ border-bottom:none; }
+  .team-name{ font-size:0.98rem; }
+  .score-box{
+    min-width:36px;
+    text-align:center;
+    background:#eef0f3;
+    border-radius:6px;
+    padding:4px 10px;
+    font-weight:600;
+    font-size:0.9rem;
+    color:var(--text);
+  }
+  .meta{
+    margin-top:10px;
+    font-size:0.8rem;
+    color:var(--text-muted);
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+  }
+  .meta span{ display:flex; align-items:center; gap:5px; }
+
+  @media (max-width: 800px){
+    .bracket{
+      grid-template-columns:1fr;
+      grid-template-rows:none;
+    }
+    .node.sf1{ grid-column:1; grid-row:1; }
+    .node.sf2{ grid-column:1; grid-row:2; }
+    .node.final-mare{ grid-column:1; grid-row:3; align-self:auto; margin-top:8px;}
+    .node.final-mica{ grid-column:1; grid-row:4; }
+    .bracket svg.bracket-lines{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏆 SuperCupa Fieni</h1>
+  <div class="subtitle">Semifinale → Finala Mare → Finala Mică</div>
+</header>
+
+<main>
+  <div class="bracket" id="bracket">
+    <svg class="bracket-lines" id="bracketLines"></svg>
+
+    <div class="node sf1">
+      <div class="match-label">Semifinala 1</div>
+      <div class="card" id="sf1">
+        <div class="team-row">
+          <span class="team-name" id="sf1-name-a">Echipa A</span>
+          <span class="score-box" id="sf1-score-a">-</span>
+        </div>
+        <div class="team-row">
+          <span class="team-name" id="sf1-name-b">Echipa B</span>
+          <span class="score-box" id="sf1-score-b">-</span>
+        </div>
+        <div class="meta">
+          <span>🎟️ 20 august 2026</span>
+          <span>🕒 18:00</span>
+          <span>📍 Stadionul Fieni</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="node sf2">
+      <div class="match-label">Semifinala 2</div>
+      <div class="card" id="sf2">
+        <div class="team-row">
+          <span class="team-name" id="sf2-name-a">Echipa C</span>
+          <span class="score-box" id="sf2-score-a">-</span>
+        </div>
+        <div class="team-row">
+          <span class="team-name" id="sf2-name-b">Echipa D</span>
+          <span class="score-box" id="sf2-score-b">-</span>
+        </div>
+        <div class="meta">
+          <span>🎟️ 20 august 2026</span>
+          <span>🕒 20:00</span>
+          <span>📍 Stadionul Fieni</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="node final-mare">
+      <div class="match-label">Finala Mare</div>
+      <div class="card highlight-blue" id="finalMare">
+        <div class="team-row">
+          <span class="team-name" id="fm-name-a">Câștigător SF1</span>
+          <span class="score-box" id="fm-score-a">-</span>
+        </div>
+        <div class="team-row">
+          <span class="team-name" id="fm-name-b">Câștigător SF2</span>
+          <span class="score-box" id="fm-score-b">-</span>
+        </div>
+        <div class="meta">
+          <span>🎟️ 24 august 2026</span>
+          <span>🕒 20:00</span>
+          <span>📍 Stadionul Fieni</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="node final-mica">
+      <div class="match-label">Finala Mică</div>
+      <div class="card highlight-orange" id="finalMica">
+        <div class="team-row">
+          <span class="team-name" id="fn-name-a">Pierzător SF1</span>
+          <span class="score-box" id="fn-score-a">-</span>
+        </div>
+        <div class="team-row">
+          <span class="team-name" id="fn-name-b">Pierzător SF2</span>
+          <span class="score-box" id="fn-score-b">-</span>
+        </div>
+        <div class="meta">
+          <span>🎟️ 24 august 2026</span>
+          <span>🕒 18:00</span>
+          <span>📍 Stadionul Fieni</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  /* =========================================================
+     EDITEAZĂ AICI numele echipelor și scorurile.
+     Lasă ghilimele goale "" pentru un scor care încă nu e jucat
+     (se va afișa "-"). Pentru nume, scrie orice text vrei.
+     După ce modifici, salvează / dă Commit pe GitHub.
+     ========================================================= */
+  const DATE = {
+    sf1: { numeA: "Echipa A", scorA: "", numeB: "Echipa B", scorB: "" },
+    sf2: { numeA: "Echipa C", scorA: "", numeB: "Echipa D", scorB: "" },
+    finalaMare: { numeA: "Câștigător SF1", scorA: "", numeB: "Câștigător SF2", scorB: "" },
+    finalaMica: { numeA: "Pierzător SF1", scorA: "", numeB: "Pierzător SF2", scorB: "" }
+  };
+  /* ========================================================= */
+
+  function set(id, value){
+    const el = document.getElementById(id);
+    if (el) el.textContent = (value === "" || value === null || value === undefined) ? "-" : value;
+  }
+  function setName(id, value){
+    const el = document.getElementById(id);
+    if (el && value) el.textContent = value;
+  }
+
+  setName('sf1-name-a', DATE.sf1.numeA);
+  setName('sf1-name-b', DATE.sf1.numeB);
+  set('sf1-score-a', DATE.sf1.scorA);
+  set('sf1-score-b', DATE.sf1.scorB);
+
+  setName('sf2-name-a', DATE.sf2.numeA);
+  setName('sf2-name-b', DATE.sf2.numeB);
+  set('sf2-score-a', DATE.sf2.scorA);
+  set('sf2-score-b', DATE.sf2.scorB);
+
+  setName('fm-name-a', DATE.finalaMare.numeA);
+  setName('fm-name-b', DATE.finalaMare.numeB);
+  set('fm-score-a', DATE.finalaMare.scorA);
+  set('fm-score-b', DATE.finalaMare.scorB);
+
+  setName('fn-name-a', DATE.finalaMica.numeA);
+  setName('fn-name-b', DATE.finalaMica.numeB);
+  set('fn-score-a', DATE.finalaMica.scorA);
+  set('fn-score-b', DATE.finalaMica.scorB);
+
+  // ---- Draw bracket connector lines dynamically ----
+  function drawBracketLines(){
+    const bracket = document.getElementById('bracket');
+    const svg = document.getElementById('bracketLines');
+    const sf1 = document.getElementById('sf1');
+    const sf2 = document.getElementById('sf2');
+    const finalMare = document.getElementById('finalMare');
+    if (!bracket || !sf1 || !sf2 || !finalMare) return;
+
+    const bRect = bracket.getBoundingClientRect();
+
+    if (window.innerWidth <= 800) {
+      svg.setAttribute('viewBox', `0 0 ${bRect.width} ${bRect.height}`);
+      svg.innerHTML = '';
+      return;
+    }
+
+    const r1 = sf1.getBoundingClientRect();
+    const r2 = sf2.getBoundingClientRect();
+    const rf = finalMare.getBoundingClientRect();
+
+    const y1 = r1.top - bRect.top + r1.height / 2;
+    const y2 = r2.top - bRect.top + r2.height / 2;
+    const yMid = rf.top - bRect.top + rf.height / 2;
+    const xLeft = r1.right - bRect.left;
+    const xRight = rf.left - bRect.left;
+    const midX = (xLeft + xRight) / 2;
+    const radius = 10;
+
+    function elbowPath(x1, y1, x2, y2, midX, radius){
+      const dir = y2 > y1 ? 1 : -1;
+      return `M${x1},${y1} H${midX - radius}
+              Q${midX},${y1} ${midX},${y1 + radius*dir}
+              V${y2 - radius*dir}
+              Q${midX},${y2} ${midX + radius},${y2}
+              H${x2}`;
+    }
+
+    const path1 = elbowPath(xLeft, y1, xRight, yMid, midX, radius);
+    const path2 = elbowPath(xLeft, y2, xRight, yMid, midX, radius);
+
+    svg.setAttribute('viewBox', `0 0 ${bRect.width} ${bRect.height}`);
+    svg.innerHTML = `<path d="${path1}"></path><path d="${path2}"></path>`;
+  }
+
+  window.addEventListener('load', drawBracketLines);
+  window.addEventListener('resize', () => {
+    clearTimeout(window._bracketResizeTO);
+    window._bracketResizeTO = setTimeout(drawBracketLines, 100);
+  });
+  if (window.ResizeObserver) {
+    new ResizeObserver(drawBracketLines).observe(document.getElementById('bracket'));
+  }
+</script>
+
+</body>
+</html>
