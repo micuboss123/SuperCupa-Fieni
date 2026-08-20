@@ -13,6 +13,8 @@
     --text-muted:#6b7280;
     --border:#e5e7eb;
     --line:#c7cdd6;
+    --gold:#d4af37;
+    --silver:#9ca3af;
   }
   *{box-sizing:border-box;}
   body{
@@ -88,8 +90,8 @@
     border-radius:10px;
     padding:16px 18px;
   }
-  .card.highlight-blue{ border:2px solid var(--blue); }
-  .card.highlight-orange{ border:2px solid var(--orange); }
+  .card.highlight-blue{ border:3px solid var(--gold); box-shadow:0 0 0 1px var(--gold) inset; }
+  .card.highlight-orange{ border:3px solid var(--silver); box-shadow:0 0 0 1px var(--silver) inset; }
 
   .team-row{
     display:flex;
@@ -109,6 +111,17 @@
     font-weight:600;
     font-size:0.9rem;
     color:var(--text);
+  }
+  .penalty-row{
+    font-size:0.85rem;
+    font-weight:700;
+    color:#b45309;
+    background:#fef3c7;
+    border:1px solid #fde68a;
+    border-radius:6px;
+    padding:5px 10px;
+    margin-top:8px;
+    text-align:center;
   }
   .meta{
     margin-top:10px;
@@ -151,12 +164,14 @@
           <!-- EDITEAZA numele echipei aici -->
           <span class="team-name" id="sf1-name-a">Fc Merilor🍎</span>
           <!-- EDITEAZA scorul aici (intre ghilimele, sau "-" daca nu s-a jucat) -->
-          <span class="score-box" id="sf1-score-a">-</span>
+          <span class="score-box" id="sf1-score-a">4</span>
         </div>
         <div class="team-row">
           <span class="team-name" id="sf1-name-b">FC KoK🍆</span>
-          <span class="score-box" id="sf1-score-b">-</span>
+          <span class="score-box" id="sf1-score-b">4</span>
         </div>
+        <!-- EDITEAZA scorul de la penalty-uri aici (intre ghilimele/text) -->
+        <div class="penalty-row">Penalty-uri: <span id="sf1-pen-a">3</span> - <span id="sf1-pen-b">4</span></div>
         <div class="meta">
           <span>🎟️ 19 august 2026</span>
           <span>🕒 17:00</span>
@@ -170,12 +185,13 @@
       <div class="card" id="sf2">
         <div class="team-row">
           <span class="team-name" id="sf2-name-a">Fc Sporting Fata Blocului🏢</span>
-          <span class="score-box" id="sf2-score-a">-</span>
+          <span class="score-box" id="sf2-score-a">2</span>
         </div>
         <div class="team-row">
-          <span class="team-name" id="sf2-name-b">FC Kobesti</span>
-          <span class="score-box" id="sf2-score-b">-</span>
+          <span class="team-name" id="sf2-name-b">FC Kobiesti</span>
+          <span class="score-box" id="sf2-score-b">2</span>
         </div>
+        <div class="penalty-row">Penalty-uri: <span id="sf2-pen-a">3</span> - <span id="sf2-pen-b">5</span></div>
         <div class="meta">
           <span>🎟️ 19 august 2026</span>
           <span>🕒 17:30</span>
@@ -185,38 +201,40 @@
     </div>
 
     <div class="node final-mare">
-      <div class="match-label">Finala Mare</div>
+      <div class="match-label" style="color:var(--gold);">Finala Mare</div>
       <div class="card highlight-blue" id="finalMare">
         <div class="team-row">
-          <span class="team-name" id="fm-name-a">Câștigător SF1</span>
+          <span class="team-name" id="fm-name-a">FC KoK🍆</span>
           <span class="score-box" id="fm-score-a">-</span>
         </div>
         <div class="team-row">
-          <span class="team-name" id="fm-name-b">Câștigător SF2</span>
+          <span class="team-name" id="fm-name-b">FC Kobiesti</span>
           <span class="score-box" id="fm-score-b">-</span>
         </div>
+        <div class="penalty-row">Penalty-uri: <span id="fm-pen-a">-</span> - <span id="fm-pen-b">-</span></div>
         <div class="meta">
-          <span>🎟️ 19 august 2026</span>
-          <span>🕒 18:30</span>
+          <span>🎟️ 23 august 2026</span>
+          <span>🕒 17:30</span>
           <span>📍 Sala de sport Fieni</span>
         </div>
       </div>
     </div>
 
     <div class="node final-mica">
-      <div class="match-label">Finala Mică</div>
+      <div class="match-label" style="color:var(--silver);">Finala Mică</div>
       <div class="card highlight-orange" id="finalMica">
         <div class="team-row">
-          <span class="team-name" id="fn-name-a">Pierzător SF1</span>
+          <span class="team-name" id="fn-name-a">Fc Merilor🍎</span>
           <span class="score-box" id="fn-score-a">-</span>
         </div>
         <div class="team-row">
-          <span class="team-name" id="fn-name-b">Pierzător SF2</span>
+          <span class="team-name" id="fn-name-b">Fc Sporting Fata Blocului🏢</span>
           <span class="score-box" id="fn-score-b">-</span>
         </div>
+        <div class="penalty-row">Penalty-uri: <span id="fn-pen-a">-</span> - <span id="fn-pen-b">-</span></div>
         <div class="meta">
-          <span>🎟️ 19 august 2026</span>
-          <span>🕒 18:00</span>
+          <span>🎟️ 23 august 2026</span>
+          <span>🕒 17:00</span>
           <span>📍 Sala de sport Fieni</span>
         </div>
       </div>
